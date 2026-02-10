@@ -10,7 +10,9 @@ const INITIAL_METRICS: MetricData = {
   facebookFollowers: 10679,
   discordMembers: 350795,
   linkedinViews: 15000,
-  discordActivity: 8000,
+  linkedinGroupViews: 72564,
+  facebookViews: 32521,
+  discordActivity: 296215,
 };
 
 export const useLiveMetrics = () => {
@@ -29,7 +31,9 @@ export const useLiveMetrics = () => {
           facebookFollowers: dbMetrics.find(m => m.metric_type === 'facebook_followers')?.current_value || 10679,
           discordMembers: dbMetrics.find(m => m.metric_type === 'discord_members')?.current_value || 350795,
           linkedinViews: dbMetrics.find(m => m.metric_type === 'linkedin_views')?.current_value || 15000,
-          discordActivity: dbMetrics.find(m => m.metric_type === 'discord_activity')?.current_value || 8000,
+          linkedinGroupViews: dbMetrics.find(m => m.metric_type === 'linkedin_group_views')?.current_value || 72564,
+          facebookViews: dbMetrics.find(m => m.metric_type === 'facebook_views')?.current_value || 32521,
+          discordActivity: dbMetrics.find(m => m.metric_type === 'discord_activity')?.current_value || 296215,
         };
         setMetrics(metricsData);
         saveMetrics(metricsData);

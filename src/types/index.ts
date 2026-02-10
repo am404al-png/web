@@ -45,6 +45,8 @@ export interface MetricData {
   facebookFollowers: number;
   discordMembers: number;
   linkedinViews: number;
+  linkedinGroupViews: number;
+  facebookViews: number;
   discordActivity: number;
 }
 

@@ -83,6 +83,7 @@ function App() {
               count={metrics.linkedinGroupMembers}
               subtitle="Community Members"
               icon="linkedinGroup"
+              views={metrics.linkedinGroupViews}
               onClick={() => openAnalytics('LinkedIn Group Members', metrics.linkedinGroupMembers, '#0A66C2')}
             />
             <AudienceCard
@@ -90,6 +91,7 @@ function App() {
               count={metrics.facebookFollowers}
               subtitle="Social Media"
               icon="facebook"
+              views={metrics.facebookViews}
               onClick={() => openAnalytics('Facebook Followers', metrics.facebookFollowers, '#1877F2')}
             />
             <AudienceCard
