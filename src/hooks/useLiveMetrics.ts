@@ -20,25 +20,23 @@ export const useLiveMetrics = () => {
   useEffect(() => {
     const loadInitialMetrics = async () => {
       try {
-        const stored = loadMetrics();
-        if (stored && stored.revenue >= 358) {
-          setMetrics(stored);
-        } else {
-          const dbMetrics = await fetchMetrics();
-          const metricsData: MetricData = {
-            revenue: dbMetrics.find(m => m.metric_type === 'revenue')?.current_value || 358,
-            linkedinFollowers: dbMetrics.find(m => m.metric_type === 'linkedin_followers')?.current_value || 8750,
-            linkedinGroupMembers: dbMetrics.find(m => m.metric_type === 'linkedin_group_members')?.current_value || 784705,
-            facebookFollowers: dbMetrics.find(m => m.metric_type === 'facebook_followers')?.current_value || 10679,
-            discordMembers: dbMetrics.find(m => m.metric_type === 'discord_members')?.current_value || 350795,
-            linkedinViews: dbMetrics.find(m => m.metric_type === 'linkedin_views')?.current_value || 15000,
-            discordActivity: dbMetrics.find(m => m.metric_type === 'discord_activity')?.current_value || 8000,
-          };
-          setMetrics(metricsData);
-          saveMetrics(metricsData);
-        }
+        localStorage.removeItem('influencer_platform_metrics');
+        const dbMetrics = await fetchMetrics();
+        const metricsData: MetricData = {
+          revenue: Math.max(dbMetrics.find(m => m.metric_type === 'revenue')?.current_value || 358, 358),
+          linkedinFollowers: dbMetrics.find(m => m.metric_type === 'linkedin_followers')?.current_value || 8750,
+          linkedinGroupMembers: dbMetrics.find(m => m.metric_type === 'linkedin_group_members')?.current_value || 784705,
+          facebookFollowers: dbMetrics.find(m => m.metric_type === 'facebook_followers')?.current_value || 10679,
+          discordMembers: dbMetrics.find(m => m.metric_type === 'discord_members')?.current_value || 350795,
+          linkedinViews: dbMetrics.find(m => m.metric_type === 'linkedin_views')?.current_value || 15000,
+          discordActivity: dbMetrics.find(m => m.metric_type === 'discord_activity')?.current_value || 8000,
+        };
+        setMetrics(metricsData);
+        saveMetrics(metricsData);
       } catch (error) {
         console.error('Failed to load metrics:', error);
+        setMetrics(INITIAL_METRICS);
+        saveMetrics(INITIAL_METRICS);
       } finally {
         setIsLoading(false);
       }
