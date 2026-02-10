@@ -21,7 +21,7 @@ export const useLiveMetrics = () => {
     const loadInitialMetrics = async () => {
       try {
         const stored = loadMetrics();
-        if (stored) {
+        if (stored && stored.revenue >= 358) {
           setMetrics(stored);
         } else {
           const dbMetrics = await fetchMetrics();
